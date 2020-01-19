@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+   	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta http-equiv="Cache-Control" content="max-age=36000" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="author" content="Buffoon">
+	    <meta name="keyword"  content="Buffoon, 博客, 技术">
+	    <meta name="description" content="Buffoon, 博客, 技术">
+	    <link rel="shortcut icon" href="img/favicon.ico"/>
+	    <title>代码管理中常用git操作 - Buffoon博客 | Buffoon的技术博客</title>
+
+	    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"crossorigin="anonymous">
+
+	    <!-- Hux-blog CSS -->
+	    <link rel="stylesheet" type="text/css" href="css/hux-blog.min.css">
+
+	    <!-- Pygments Github CSS -->
+	    <link rel="stylesheet" type="text/css" href="css/syntax.css">
+
+	    <!-- Custom Fonts -->
+	    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	    
+	    <!-- add highlight -->
+	    <link rel="stylesheet" type="text/css" href="css/androidstudio.css">
+		
+		<!-- Style CSS -->
+	    <link rel="stylesheet" type="text/css" href="css/style.css">
+   	</head>
+
+   	<body ontouchstart="">
+   	  	<!-- 导航条 -->
+   	  	<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+		    <div class="container-fluid">
+		        <!-- Brand and toggle get grouped for better mobile display -->
+		        <div class="navbar-header page-scroll">
+		            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#huxblog_navbar">
+		                <span class="sr-only">Toggle navigation</span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		            </button>
+		            <a class="navbar-brand" href="/">Buffoon</a>
+		        </div>
+				
+	            <div id="huxblog_navbar" class="navbar-collapse">
+	                <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+	                    <li><a href="#">首页</a></li>
+			            <li><a href="#">目录</a></li>
+			            <li class="dropdown">
+				            <a href="#"class="dropdown-toggle"data-toggle="dropdown">
+				                分类
+				                <b class="caret"></b>
+				            </a>
+				            <ul class="dropdown-menu">
+				            	<li><a href="#">虚拟化</a></li>
+				                <li><a href="#">网络</a></li>
+				                <li><a href="#">前端</a></li>
+				                <li><a href="#">Docker</a></li>
+				                <li><a href="#">编程语言</a></li>
+				                <li><a href="#">通用</a></li>
+				            </ul>
+			            </li>
+			         	<li class="dropdown">
+			            	<a href="#"class="dropdown-toggle"data-toggle="dropdown">
+			               		标签 
+			               		<b class="caret"></b>
+			            	</a>
+			            	<ul class="dropdown-menu">
+			               		<li><a href="#">云计算</a></li>
+			               		<li><a href="#">Python</a></li>
+			               		<li><a href="#">Golang</a></li>
+			               		<li><a href="#">Git</a></li>
+			            	</ul>
+			         	</li>
+	                </ul>
+	            </div>
+	        </div>	    
+		</nav>
+		<!-- 导航条结束 -->
+
+		<!-- 标题栏 -->
+		<style type="text/css">
+		    header.intro-header{
+		        position: relative;
+		        background-image: url('./');
+		    }		    
+		</style>
+		<header class="intro-header" >
+		    <div class="header-mask"></div>
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+		                <div class="post-heading">
+		                    <div class="tags">		               
+		                        <a target="_blank" class="tag" href="#" title="Python">Git</a>
+		                        <a target="_blank" class="classify" href="#" title="虚拟化">通用</a>
+		                    </div>
+		                    <h1>代码管理中常用Git操作</h1>		                    		                    
+		                    <h2 class="subheading"></h2>		                    
+		                    <span class="meta">
+		                    	Buffoon 发表于 2020,1,18
+					    		<a href="#" style="float: right; font-size: 14px">编辑</a>
+		                    </span>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</header>
+		<!-- 标题栏结束 -->
+
+		<!-- 正文 -->
+		<article>
+		    <div class="container" style="overflow:hidden">
+		        <div class="row">
+		        	<!-- post container -->
+		            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+<h1>1、git常用命令速查</h1>
+
+<h3><strong>1.1 初始化相关操作</strong></h3>
+
+<pre><code>$ git config --global user.name &quot;John Doe&quot; # 配置用户名 ！仅第一次必须
+
+$ git config --global user.email je@example.com # 配置电邮 ！仅第一次必须
+
+$ git config --list # 查看配置信息
+
+$ git init # 初始化仓库
+
+$ git remote add origin git@github.com:michaelliao/learngit.git # 将本地仓库与远程仓库关联(远程仓库已创建)
+</code></pre>
+
+<h3>1.2 提交代码相关操作</h3>
+
+<pre><code>$ git clone git@github.com:michaelliao/learngit.git # 从远程仓库克隆代码到本地
+
+$ git add [文件名/./--all] # 添加新的文件到暂存区
+
+$ git commit -m &quot;Story 182: Fix benchmark&quot; # 提交更新
+
+$ git commit -a -m 'added new benchmarks' # 跳过add命令直接提交
+
+$ git pull # 同步远程仓库最新代码到本地
+
+$ git push origin [分支名] # 推送代码到远程分支（加 -u 参数是同时关联远程与本地分支，一般新分支第一次推送时使用）
+</code></pre>
+
+<h3>1.3 分支相关操作</h3>
+
+<pre><code>$ git branch # 查看分支
+
+$ git branch -v # 查看各分支最后一个提交对象
+
+$ git branch --merged # 查看已经merge过的分支
+
+$ git branch --no-merged # 尚未merge的分支
+
+$ git branch -d testing # 删除掉分支(如果还没有merge,会出现错误,-D可以强制删除)
+
+$ git branch -a # 查看所有分支（包括远程服务器）
+
+$ git checkout iss53 # 切换到iss53分支
+
+$ git checkout -b iss53 # 新建分支并切换到iss53分支 = $ git branch iss53; git checkout iss53
+
+$ git merge dev # 合并dev分支到当前分支上（合并前要先切换到合并到的目标分支上）
+</code></pre>
+
+<h3>1.4 状态查看相关操作</h3>
+
+<pre><code>$ git log  # 查看提交log
+
+$ git log --pretty=format:&quot;%h - %an, %ar : %s&quot; # 用特性的format查看log
+
+$ git log --graph # 用图表的形式显示git的合并历史
+
+$ git log --pretty=oneline # 简洁方式显示提交历史
+
+$ git reflog # 查看所有提交历史，即使是已经被回退了的提交
+
+$ git status # 检查文件当前的状态
+
+$ git diff    #查看本地当前修改
+
+$ git diff --cached # 若要看已经暂存起来的文件和上次提交时的快照之间的差异
+
+$ git show commitid. 查看某次提交的修改
+</code></pre>
+
+<h3>1.5 代码回退相关操作</h3>
+
+<pre><code>$ git reset --hard HEAD^ # 将已经commit的代码回退到指定版本（HEAD^^是上上个版本，HEAD～3是上上上个版本，以此类推）
+
+$ git reset --hard commit_id # 将版本回退到指定commitid，注意这个也可以向前进找到已经被回退之前的代码
+
+$ git checkout -- readme.txt # 将工作区的修改回退，也就是将还未add的内容回退
+
+$ git reset HEAD readme.txt # 将暂存区的修改回退，也就是将已经add还没有commit的内容回退（工作区修改依然存在，只是不在暂存区了）
+
+$ git rm test.txt # 从版本库中删除文件
+
+$ git rm --cached log.log # 从git仓库中删除不小心追踪的文件（用于gitignore之前追踪的文件） 
+</code></pre>
+
+<h1>2、常见场景下git操作流程</h1>
+
+<h3>2.1 远程仓库回退</h3>
+
+<p>本场景主要是本地代码出现问题，然后本地仓库回退了代码，同时也需要回退远程仓库的代码。</p>
+
+<p>流程：</p>
+
+<ul>
+<li>先回退本地代码，具体回退操作可以参见1.5命令</li>
+<li>然后强制push到远程分支上去： git push origin mybranch -f</li>
+</ul>
+
+<h3>2.2 删除本地以及远程仓库分支</h3>
+
+<p>本场景主要是自己创建了临时分支，提交代码后临时分支不再需要，可以删除清理。</p>
+
+<p>流程：</p>
+
+<ul>
+<li>本地先切换到非要删除分支上</li>
+<li>然后删除本地指定分支：git branch -D mybranch</li>
+<li>再之后删除远程分支：git push origin &ndash;delete mybranch</li>
+</ul>
+
+<h3>2.3 提交review后重新修改</h3>
+
+<p>本场景主要是已经commit并push了一次代码，发起review后还需要重新修改代码，但是又不想重新再开一个commit（个人分支仅仅push但还没有发起merge request 或者 已经发起了merge request均适用）。</p>
+
+<p>流程：</p>
+
+<ul>
+<li>修改本地代码</li>
+<li>add代码：git add &ndash;all/./修改的文件</li>
+<li>重新commit：git commit &ndash;amend</li>
+<li>push代码：git push origin mybranch -f</li>
+</ul>
+
+<h3>2.4 解决merge冲突</h3>
+
+<p>本场景是自己分支新push的代码发起了merge request，但是在merge时发现跟master分支已有代码有冲突，这时需要解决冲突重新merge。</p>
+
+<p>流程：</p>
+
+<ul>
+<li>首先本地切换到自己的分支：git checkout mybranch</li>
+<li>然后fetch一下最新代码：git fetch</li>
+<li>然后将自己分支rebase一下：git rebase -i origin/master(要rebase到的远程分支)</li>
+<li>然后手动解决冲突（rebase后会提示哪些文件有冲突，有冲突的文件里面会有冲突的代码块，直接修改成最终的正确代码即可）</li>
+<li>add冲突文件：git add 冲突文件</li>
+<li>继续rebase：git rebase &ndash;continue（这里如果还有冲突会继续提示冲突，继续修改然后继续add、rebase &ndash;continue直到没有冲突为止）</li>
+<li>push代码：git push origin mybranch -f</li>
+</ul>
+						
+						<hr>
+						<hr>
+		                <ul class="pager">		                    
+		                    <li class="previous">
+		                        <a target="_blank" href="#" data-toggle="tooltip" data-placement="top" title="KVM虚拟机运行原理">
+		                        上一篇<br>
+		                        <span>KVM虚拟机运行原理</span>
+		                        </a>
+		                    </li>
+		                    		                    
+		                    <li class="next">
+		                        <a target="_blank" href="#" data-toggle="tooltip" data-placement="top" title="Python编码规范">
+		                        下一篇<br>
+		                        <span>Python编码规范</span>
+		                        </a>
+		                    </li>		                    
+		                </ul>
+					</div>
+					<!-- End post container -->
+				</div>
+			</div>					
+		</article>
+		<!-- 正文结束 -->
+
+		<!-- Footer -->
+		<footer>
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 font-awesome">
+		                <ul class="list-inline text-center">
+		                    
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+		                    
+		                    
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-stack-1x fa-inverse">知</i>
+		                            </span>
+		                        </a>
+		                    </li>
+
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+    
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+		                    
+		                    
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+		                    
+		                </ul>
+		                <p class="copyright text-muted">
+		                    Copyright &copy; Buffoon | Powered by Minimalism Blog
+		                </p>
+		            </div>
+		        </div>
+		    </div>
+		</footer>
+		<!-- Footer结束 -->
+
+      	<!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+	    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+
+	    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"crossorigin="anonymous"></script>
+
+	    <script type="text/javascript" src="js/highlight.pack.js"></script>
+	    <script>hljs.initHighlightingOnLoad();</script>
+		
+   	</body>
+</html>

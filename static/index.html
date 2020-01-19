@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+   	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta http-equiv="Cache-Control" content="max-age=36000" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="author" content="Buffoon">
+	    <meta name="keyword"  content="Buffoon, 博客, 技术">
+	    <meta name="description" content="Buffoon, 博客, 技术">
+	    <link rel="shortcut icon" href="img/favicon.ico"/>
+	    <title>Buffoon博客 | Buffoon的技术博客</title>
+
+	    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"crossorigin="anonymous">
+
+	    <!-- Hux-blog CSS -->
+	    <link rel="stylesheet" type="text/css" href="css/hux-blog.min.css">
+
+	    <!-- Pygments Github CSS -->
+	    <link rel="stylesheet" type="text/css" href="css/syntax.css">
+
+	    <!-- Custom Fonts -->
+	    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	    
+	    <!-- add highlight -->
+	    <link rel="stylesheet" type="text/css" href="css/androidstudio.css">
+		
+		<!-- Style CSS -->
+	    <link rel="stylesheet" type="text/css" href="css/style.css">
+   	</head>
+
+   	<body ontouchstart="">
+   	  	<!-- 导航条 -->
+   	  	<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+		    <div class="container-fluid">
+		        <!-- Brand and toggle get grouped for better mobile display -->
+		        <div class="navbar-header page-scroll">
+		            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#huxblog_navbar">
+		                <span class="sr-only">Toggle navigation</span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		            </button>
+		            <a class="navbar-brand" href="#">Buffoon</a>
+		        </div>
+				
+	            <div id="huxblog_navbar" class="navbar-collapse">
+	                <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+	                    <li><a href="#">首页</a></li>
+			            <li><a href="#">目录</a></li>
+			            <li class="dropdown">
+				            <a href="#"class="dropdown-toggle"data-toggle="dropdown">
+				                分类
+				                <b class="caret"></b>
+				            </a>
+				            <ul class="dropdown-menu">
+				            	<li><a href="#">虚拟化</a></li>
+				                <li><a href="#">网络</a></li>
+				                <li><a href="#">前端</a></li>
+				                <li><a href="#">Docker</a></li>
+				                <li><a href="#">编程语言</a></li>
+				                <li><a href="#">通用</a></li>
+				            </ul>
+			            </li>
+			         	<li class="dropdown">
+			            	<a href="#"class="dropdown-toggle"data-toggle="dropdown">
+			               		标签 
+			               		<b class="caret"></b>
+			            	</a>
+			            	<ul class="dropdown-menu">
+			               		<li><a href="#">云计算</a></li>
+			               		<li><a href="#">Python</a></li>
+			               		<li><a href="#">Golang</a></li>
+			               		<li><a href="#">Git</a></li>
+			            	</ul>
+			         	</li>
+			         	<li>
+	                        <a href="#">
+	                            <span class="fa-stack fa-xs">
+	                                <i class="fa fa-sign-out fa-stack-1x"></i>
+	                            </span>
+	                            登出
+	                        </a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>	    
+		</nav>
+		<!-- 导航条结束 -->
+
+		<!-- Banner栏 -->
+		<header class="intro-header" style="background-image: url('/')">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+		                <div class="site-heading">
+		                    <h1>Buffoon</h1>
+		                    <span class="subheading">技术与艺术的碰撞</span>
+		                    <div class="tags">	               
+		                        <a target="_blank" class="edit" href="#">写博文</a>
+		                    </div>  
+		                </div> 
+		            </div>
+		        </div>
+		    </div>
+		</header>
+		<!-- Banner栏结束 -->
+
+		<!-- Main Content -->
+		<div class="container">
+		  	<div class="row">
+			    <!-- PostList Container -->
+			    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 postlist-container">
+
+					<div class="post-preview">
+					    <a target="_blank" href="#">
+					        <h2 class="post-title">
+					            ServiceIsolate工作原理
+					        </h2>				        
+					        <div class="post-content-preview">
+	一、概述
+	在前面文章深入理解Dart虚拟机启动中，有讲到Dart虚拟机中有一个比较重要的isolate，创建的isolate名为”vm-service”，运行在独立的线程，也就是ServiceIsolate，这是用于系统调试相关功能的一个isolate，提供虚拟机相关服务，比如hot reload，timeline等。这里先来看看ServiceIsolate的启动过程以及监听处理流程。...
+					        </div>
+					    </a>
+					    <p />
+					    <p class="post-meta">
+					        Buffoon 发布于 2020,1,19
+					        <a class="function-link" href="#">删除</a>
+					        <a class="function-link" href="#">编辑</a>
+					    </p>
+					</div>
+					<hr />
+
+					<div class="post-preview">
+					    <a target="_blank" href="#">
+					        <h2 class="post-title">
+					            ServiceIsolate工作原理
+					        </h2>				        
+					        <div class="post-content-preview">
+	一、概述
+	在前面文章深入理解Dart虚拟机启动中，有讲到Dart虚拟机中有一个比较重要的isolate，创建的isolate名为”vm-service”，运行在独立的线程，也就是ServiceIsolate，这是用于系统调试相关功能的一个isolate，提供虚拟机相关服务，比如hot reload，timeline等。这里先来看看ServiceIsolate的启动过程以及监听处理流程。...
+					        </div>
+					    </a>
+					    <p />
+					    <p class="post-meta">
+					        Buffoon 发布于 2020,1,19
+					        <a class="function-link" href="#">删除</a>
+					        <a class="function-link" href="#">编辑</a>
+					    </p>
+					</div>
+					<hr />
+
+					<div class="post-preview">
+					    <a target="_blank" href="#">
+					        <h2 class="post-title">
+					            ServiceIsolate工作原理
+					        </h2>				        
+					        <div class="post-content-preview">
+	一、概述
+	在前面文章深入理解Dart虚拟机启动中，有讲到Dart虚拟机中有一个比较重要的isolate，创建的isolate名为”vm-service”，运行在独立的线程，也就是ServiceIsolate，这是用于系统调试相关功能的一个isolate，提供虚拟机相关服务，比如hot reload，timeline等。这里先来看看ServiceIsolate的启动过程以及监听处理流程。...
+					        </div>
+					    </a>
+					    <p />
+					    <p class="post-meta">
+					        Buffoon 发布于 2020,1,19
+					        <a class="function-link" href="#">删除</a>
+					        <a class="function-link" href="#">编辑</a>
+					    </p>
+					</div>
+					<hr />
+
+					<div class="post-preview">
+					    <a target="_blank" href="#">
+					        <h2 class="post-title">
+					            ServiceIsolate工作原理
+					        </h2>				        
+					        <div class="post-content-preview">
+	一、概述
+	在前面文章深入理解Dart虚拟机启动中，有讲到Dart虚拟机中有一个比较重要的isolate，创建的isolate名为”vm-service”，运行在独立的线程，也就是ServiceIsolate，这是用于系统调试相关功能的一个isolate，提供虚拟机相关服务，比如hot reload，timeline等。这里先来看看ServiceIsolate的启动过程以及监听处理流程。...
+					        </div>
+					    </a>
+					    <p />
+					    <p class="post-meta">
+					        Buffoon 发布于 2020,1,19
+					        <a class="function-link" href="#">删除</a>
+					        <a class="function-link" href="#">编辑</a>
+					    </p>
+					</div>
+					<hr />
+
+					<div class="post-preview">
+					    <a target="_blank" href="#">
+					        <h2 class="post-title">
+					            ServiceIsolate工作原理
+					        </h2>				        
+					        <div class="post-content-preview">
+	一、概述
+	在前面文章深入理解Dart虚拟机启动中，有讲到Dart虚拟机中有一个比较重要的isolate，创建的isolate名为”vm-service”，运行在独立的线程，也就是ServiceIsolate，这是用于系统调试相关功能的一个isolate，提供虚拟机相关服务，比如hot reload，timeline等。这里先来看看ServiceIsolate的启动过程以及监听处理流程。...
+					        </div>
+					    </a>
+					    <p />
+					    <p class="post-meta">
+					        Buffoon 发布于 2020,1,19
+					        <a class="function-link" href="#">删除</a>
+					        <a class="function-link" href="#">编辑</a>
+					    </p>
+					</div>
+					<hr />
+
+					<div class="post-preview">
+					    <a target="_blank" href="#">
+					        <h2 class="post-title">
+					            ServiceIsolate工作原理
+					        </h2>				        
+					        <div class="post-content-preview">
+	一、概述
+	在前面文章深入理解Dart虚拟机启动中，有讲到Dart虚拟机中有一个比较重要的isolate，创建的isolate名为”vm-service”，运行在独立的线程，也就是ServiceIsolate，这是用于系统调试相关功能的一个isolate，提供虚拟机相关服务，比如hot reload，timeline等。这里先来看看ServiceIsolate的启动过程以及监听处理流程。...
+					        </div>
+					    </a>
+					    <p />
+					    <p class="post-meta">
+					        Buffoon 发布于 2020,1,19
+					        <a class="function-link" href="#">删除</a>
+					        <a class="function-link" href="#">编辑</a>
+					    </p>
+					</div>
+					<hr />
+
+					<div class="post-preview">
+					    <a target="_blank" href="#">
+					        <h2 class="post-title">
+					            ServiceIsolate工作原理
+					        </h2>				        
+					        <div class="post-content-preview">
+	一、概述
+	在前面文章深入理解Dart虚拟机启动中，有讲到Dart虚拟机中有一个比较重要的isolate，创建的isolate名为”vm-service”，运行在独立的线程，也就是ServiceIsolate，这是用于系统调试相关功能的一个isolate，提供虚拟机相关服务，比如hot reload，timeline等。这里先来看看ServiceIsolate的启动过程以及监听处理流程。...
+					        </div>
+					    </a>
+					    <p />
+					    <p class="post-meta">
+					        Buffoon 发布于 2020,1,19
+					        <a class="function-link" href="#">删除</a>
+					        <a class="function-link" href="#">编辑</a>
+					    </p>
+					</div>
+					<hr />
+					
+					<hr />
+					<!-- Pager -->
+					<ul class="pager">		    
+					    <li class="previous">
+					        <a href="#">&larr; Previous</a>
+					    </li>
+					    	    
+					    <li class="next">
+					        <a href="#">Next &rarr;</a>
+					    </li>   
+					</ul>
+				<!-- End PostList Container -->
+			    </div>
+			</div>
+		</div>
+		<!-- End Main Content -->
+
+		<!-- Footer -->
+		<footer>
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 font-awesome">
+		                <ul class="list-inline text-center">
+		                    
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+		                    
+		                    
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-stack-1x fa-inverse">知</i>
+		                            </span>
+		                        </a>
+		                    </li>
+
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+    
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+		                    
+		                    
+		                    <li>
+		                        <a target="_blank" href="#">
+		                            <span class="fa-stack fa-lg">
+		                                <i class="fa fa-circle fa-stack-2x"></i>
+		                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+		                            </span>
+		                        </a>
+		                    </li>
+		                    
+		                </ul>
+		                <p class="copyright text-muted">
+		                    Copyright &copy; Buffoon | Powered by Minimalism Blog
+		                </p>
+		            </div>
+		        </div>
+		    </div>
+		</footer>
+		<!-- Footer结束 -->
+
+      	<!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+	    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+
+	    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"crossorigin="anonymous"></script>
+
+	    <script type="text/javascript" src="js/highlight.pack.js"></script>
+	    <script>hljs.initHighlightingOnLoad();</script>
+		
+   	</body>
+</html>
