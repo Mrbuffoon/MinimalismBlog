@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"MinimalismBlog/controllers"
 	"github.com/astaxie/beego"
 )
 
@@ -11,14 +12,21 @@ func init() {
 	beego.SetStaticPath("/js","static/js")
 
 	//重定向静态页面
-	beego.SetStaticPath("index.html", "views/index.html")
-	beego.SetStaticPath("blog_detail.html", "views/blog_detail.html")
-	beego.SetStaticPath("classify.html", "views/classify.html")
-	beego.SetStaticPath("install.html", "views/install.html")
-	beego.SetStaticPath("login.html", "views/login.html")
-	beego.SetStaticPath("modify_pwd.html", "views/modify_pwd.html")
-	beego.SetStaticPath("resume.html", "views/resume.html")
-	beego.SetStaticPath("tag.html", "views/tag.html")
+	beego.SetStaticPath("index.html", "static/index.html")
+	beego.SetStaticPath("blog_detail.html", "static/blog_detail.html")
+	beego.SetStaticPath("classify.html", "static/classify.html")
+	beego.SetStaticPath("resume.html", "static/resume.html")
+	beego.SetStaticPath("tag.html", "static/tag.html")
 
-	//接口API路由
+	beego.SetStaticPath("manager.html", "static/manager.html")
+	beego.SetStaticPath("login.html", "static/login.html")
+	beego.SetStaticPath("modify_pwd.html", "static/modify_pwd.html")
+	beego.SetStaticPath("modify_nick.html", "static/modify_nick.html")
+
+
+	//接口API路由(用户系统)
+	beego.Router("/login", &controllers.UserController{}, "post:Login")
+	beego.Router("/logout", &controllers.UserController{}, "post:Login")
+	beego.Router("/modify/pwd", &controllers.UserController{}, "post:ModifyPwd")
+	beego.Router("/modify/nickname", &controllers.UserController{}, "post:ModifyNickname")
 }
