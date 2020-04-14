@@ -5,6 +5,7 @@ import (
 	"MinimalismBlog/util"
 	"encoding/json"
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -52,7 +53,8 @@ func (u *UserController) Login() {
 		u.SetSession("login", true)
 	}
 
-	u.Data["json"], _ = json.Marshal(&response)
+	logs.Debug(response)
+	u.Data["json"] = response
 	u.ServeJSON()
 }
 
@@ -70,7 +72,7 @@ func (u *UserController) Logout() {
 		response.Message = err.Error()
 	}
 
-	u.Data["json"], _ = json.Marshal(&response)
+	u.Data["json"] = response
 	u.ServeJSON()
 }
 
@@ -121,7 +123,7 @@ func (u *UserController) ModifyPwd() {
 		response.Message = err.Error()
 	}
 
-	u.Data["json"], _ = json.Marshal(&response)
+	u.Data["json"] = response
 	u.ServeJSON()
 }
 
@@ -171,6 +173,6 @@ func (u *UserController) ModifyNickname() {
 		response.Message = err.Error()
 	}
 
-	u.Data["json"], _ = json.Marshal(&response)
+	u.Data["json"] = response
 	u.ServeJSON()
 }

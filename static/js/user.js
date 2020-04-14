@@ -2,17 +2,18 @@ function Login(){
     const username = $("#username").val();
     const password = $("#password").val();
     if(checkLogin(username, password)) {
+        var param = {
+            name : username,
+            password : password
+        };
         var aj = $.ajax( {
             url:'/login',
-            data:{
-                name : username,
-                password : password
-            },
-            type:'post',
-            cache:false,
+            data:JSON.stringify(param),
+            type:'POST',
             dataType:'json',
-            success:function(data) {
-                if(data.flag === 0 ){
+            contentType: "application/json; charset=utf-8",
+            success:function(message) {
+                if(message.flag === 0 ){
                     alert("登录成功!");
                     window.location.href='index.html';
                 }else{
