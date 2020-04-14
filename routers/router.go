@@ -26,7 +26,7 @@ func init() {
 
 	//接口API路由(用户系统)
 	beego.Router("/login", &controllers.UserController{}, "post:Login")
-	beego.Router("/logout", &controllers.UserController{}, "post:Login")
+	beego.Router("/logout", &controllers.UserController{}, "post:Logout")
 	beego.Router("/modify/pwd", &controllers.UserController{}, "post:ModifyPwd")
 	beego.Router("/modify/nickname", &controllers.UserController{}, "post:ModifyNickname")
 }
