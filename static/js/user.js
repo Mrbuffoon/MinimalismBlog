@@ -84,9 +84,7 @@ function Modify_nick(){
             contentType: "application/json; charset=utf-8",
             success:function(message) {
                 if(message.flag === 0 ){
-                    alert("昵称修改成功,新昵称：");
-                    alert(message.result.nickname);
-                    alert(message.result.name);
+                    alert("昵称修改成功,新昵称："+message.result.nickname);
                     window.location.href='index.html';
                 }else{
                     alert("用户不存在或账号密码不正确!");
