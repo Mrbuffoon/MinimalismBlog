@@ -17,40 +17,36 @@ type UserController struct {
 func (u *UserController) Login() {
 	response := util.Response{}
 
-	if login := u.GetSession("login"); login == true {
-		response.Flag = 0
-		response.Message = "登录成功"
-	} else {
-		usrParam := models.User{}
-		if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
-			user := models.User{
-				Name: usrParam.Name,
-			}
-			o := orm.NewOrm()
-			err = o.Read(&user, "Name")
+	//if login := u.GetSession("login"); login == true {
+	usrParam := models.User{}
+	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
+		user := models.User{
+			Name: usrParam.Name,
+		}
+		o := orm.NewOrm()
+		err = o.Read(&user, "Name")
+		if err != nil {
+			response.Flag = 1
+			response.Message = "用户不存在"
+		} else {
+			err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(usrParam.Password))
 			if err != nil {
 				response.Flag = 1
-				response.Message = "用户不存在"
+				response.Message = "账号与密码不匹配"
 			} else {
-				err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(usrParam.Password))
-				if err != nil {
-					response.Flag = 1
-					response.Message = "账号与密码不匹配"
-				} else {
-					response.Flag = 0
-					response.Message = "登录成功"
-					response.Result = struct {
-						Id       int    `json:"id"`
-						NickName string `json:"nick_name"`
-					}{user.Id, user.NickName}
-				}
-			}
-		} else {
-			response.Flag = 1
-			response.Message = err.Error()
-		}
+				response.Flag = 0
+				response.Message = "登录成功"
+				response.Result = struct {
+					Id       int    `json:"id"`
+					NickName string `json:"nick_name"`
+				}{user.Id, user.NickName}
 
-		u.SetSession("login", true)
+				u.SetSession("login", true)
+			}
+		}
+	} else {
+		response.Flag = 1
+		response.Message = err.Error()
 	}
 
 	logs.Debug(response)
@@ -82,10 +78,10 @@ func (u *UserController) ModifyPwd() {
 	usrParam := models.User{}
 	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
 		user := models.User{
-			Id: usrParam.Id,
+			Name: usrParam.Name,
 		}
 		o := orm.NewOrm()
-		err = o.Read(&user, "Id")
+		err = o.Read(&user, "Name")
 		if err != nil {
 			response.Flag = 1
 			response.Message = "用户不存在"
@@ -99,19 +95,20 @@ func (u *UserController) ModifyPwd() {
 					response.Flag = 1
 					response.Message = "密码为空，修改失败"
 				} else {
-					response.Flag = 0
-					response.Message = "密码修改成功"
-
 					pwdCrypto, err := bcrypt.GenerateFromPassword([]byte(usrParam.NewPwd), bcrypt.DefaultCost)
 					if err != nil {
 						response.Flag = 1
 						response.Message = err.Error()
 					}
-					user := models.User{
-						Id:       usrParam.Id,
-						Password: string(pwdCrypto),
-					}
-					if _, err := o.Update(&user, "Id"); err != nil {
+
+					qs := o.QueryTable("tb_user")
+					upParam := orm.Params{"password": string(pwdCrypto)}
+					_, err = qs.Filter("name", usrParam.Name).Update(upParam)
+					if err == nil {
+						response.Flag = 0
+						response.Message = "密码修改成功"
+						u.DelSession("login")
+					}else {
 						response.Flag = 1
 						response.Message = err.Error()
 					}
@@ -123,6 +120,7 @@ func (u *UserController) ModifyPwd() {
 		response.Message = err.Error()
 	}
 
+	logs.Debug(response)
 	u.Data["json"] = response
 	u.ServeJSON()
 }
@@ -133,10 +131,10 @@ func (u *UserController) ModifyNickname() {
 	usrParam := models.User{}
 	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
 		user := models.User{
-			Id: usrParam.Id,
+			Name: usrParam.Name,
 		}
 		o := orm.NewOrm()
-		err = o.Read(&user, "Id")
+		err = o.Read(&user, "Name")
 		if err != nil {
 			response.Flag = 1
 			response.Message = "用户不存在"
@@ -150,21 +148,20 @@ func (u *UserController) ModifyNickname() {
 					response.Flag = 1
 					response.Message = "昵称为空，修改失败"
 				} else {
-					response.Flag = 0
-					response.Message = "昵称修改成功"
-
-					user := models.User{
-						Id:       usrParam.Id,
-						NickName: usrParam.NickName,
-					}
-					if _, err := o.Update(&user, "Id"); err != nil {
+					qs := o.QueryTable("tb_user")
+					upParam := orm.Params{"nickname": usrParam.NickName}
+					_, err = qs.Filter("name", usrParam.Name).Update(upParam)
+					if err == nil {
+						response.Flag = 0
+						response.Message = "昵称修改成功"
+						response.Result = struct {
+							Name     string    `json:"name"`
+							NickName string `json:"nickname"`
+						}{usrParam.Name, usrParam.NickName}
+					}else {
 						response.Flag = 1
 						response.Message = err.Error()
 					}
-					response.Result = struct {
-						Id       int    `json:"id"`
-						NickName string `json:"nick_name"`
-					}{user.Id, user.NickName}
 				}
 			}
 		}
@@ -173,6 +170,7 @@ func (u *UserController) ModifyNickname() {
 		response.Message = err.Error()
 	}
 
+	logs.Debug(response)
 	u.Data["json"] = response
 	u.ServeJSON()
 }
