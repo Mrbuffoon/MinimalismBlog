@@ -33,7 +33,7 @@ func init() {
 	_ = orm.RegisterDriver("mysql", orm.DRMySQL)
 	_ = orm.RegisterDataBase("default", "mysql", "root:TXYhelloworld@tcp(192.144.225.216:3306)/db_blog?charset=utf8")
 
-	orm.RegisterModelWithPrefix("tb_", new(models.User))
+	orm.RegisterModelWithPrefix("tb_", new(models.User), new(models.Blog))
 	_ = orm.RunSyncdb("default", false, true)
 
 	initUser()

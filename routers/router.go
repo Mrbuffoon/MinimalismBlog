@@ -7,9 +7,9 @@ import (
 
 func init() {
 	// 重定向静态资源文件
-	beego.SetStaticPath("/img","static/img")
-	beego.SetStaticPath("/css","static/css")
-	beego.SetStaticPath("/js","static/js")
+	beego.SetStaticPath("/img", "static/img")
+	beego.SetStaticPath("/css", "static/css")
+	beego.SetStaticPath("/js", "static/js")
 
 	//重定向静态页面
 	beego.SetStaticPath("index.html", "static/index.html")
@@ -22,7 +22,6 @@ func init() {
 	beego.SetStaticPath("login.html", "static/login.html")
 	beego.SetStaticPath("modify_pwd.html", "static/modify_pwd.html")
 	beego.SetStaticPath("modify_nick.html", "static/modify_nick.html")
-
 
 	//接口API路由(用户系统)
 	beego.Router("/login", &controllers.UserController{}, "post:Login")

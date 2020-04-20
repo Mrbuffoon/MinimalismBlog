@@ -1,23 +1,22 @@
 create DATABASE db_blog;
 
-CREATE TABLE IF NOT EXISTS `tb_user`(
-   `id` INT AUTO_INCREMENT,
-   `name` VARCHAR(40) NOT NULL,
-   `nickname` VARCHAR(40) NOT NULL DEFAULT "admin",
-   `password` VARCHAR(100) NOT NULL,
-   `date` DATE,
-   PRIMARY KEY ( `id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `tb_user` (
+        `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        `name` varchar(40) NOT NULL DEFAULT ''  UNIQUE,
+        `nickname` varchar(40) NOT NULL DEFAULT 'admin' ,
+        `password` varchar(100) NOT NULL DEFAULT 'admin' ,
+        `date` date
+    ) ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS `tb_blog`(
-   `id` INT UNSIGNED AUTO_INCREMENT,
-   `title` VARCHAR(100) NOT NULL,
-   `abstract` VARCHAR(1000),
-   `article` LONGTEXT,
-   `author` VARCHAR(40) NOT NULL,
-   `tags` VARCHAR(100) NOT NULL,
-   `classify` VARCHAR(100) NOT NULL,
-   `post_date` DATE DEFAULT NULL,
-   `rm_flag` INT NOT NULL DEFAULT 0,
-   PRIMARY KEY ( `id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `tb_blog` (
+        `id` bigint AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        `title` varchar(100) NOT NULL DEFAULT '' ,
+        `abstract` varchar(200),
+        `article` longtext,
+        `author` varchar(40) NOT NULL DEFAULT '' ,
+        `tags` varchar(40) NOT NULL DEFAULT 'others' ,
+        `classify` varchar(40) NOT NULL DEFAULT 'others' ,
+        `postdate` date NOT NULL,
+        `modify_date` date NOT NULL,
+        `rmflag` integer NOT NULL DEFAULT 0
+    ) ENGINE=INNODB;

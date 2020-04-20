@@ -6,17 +6,17 @@ type BlogController struct {
 	beego.Controller
 }
 
-func (b *BlogController) Login()  {
+func (b *BlogController) Login() {
 	b.Ctx.WriteString("接口测试")
 	return
 }
 
-func (b *BlogController) Logout()  {
+func (b *BlogController) Logout() {
 	b.Ctx.WriteString("接口测试")
 	return
 }
 
-func (b *BlogController) ModifyPwd()  {
+func (b *BlogController) ModifyPwd() {
 	b.Ctx.WriteString("接口测试")
 	return
 }

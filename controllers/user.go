@@ -108,7 +108,7 @@ func (u *UserController) ModifyPwd() {
 						response.Flag = 0
 						response.Message = "密码修改成功"
 						u.DelSession("login")
-					}else {
+					} else {
 						response.Flag = 1
 						response.Message = err.Error()
 					}
@@ -155,10 +155,10 @@ func (u *UserController) ModifyNickname() {
 						response.Flag = 0
 						response.Message = "昵称修改成功"
 						response.Result = struct {
-							Name     string    `json:"name"`
+							Name     string `json:"name"`
 							NickName string `json:"nickname"`
 						}{usrParam.Name, usrParam.NickName}
-					}else {
+					} else {
 						response.Flag = 1
 						response.Message = err.Error()
 					}
