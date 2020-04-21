@@ -10,7 +10,11 @@ type User struct {
 	NickName string    `orm:"size(40);column(nickname);default(admin)";json:"nickname"`
 	Password string    `orm:"size(100);column(password);default(admin)";json:"password"`
 	Date     time.Time `orm:"column(date);auto_now_add;null;type(date)";json:"date"`
-	NewPwd   string    `orm:"_";json:"newpwd"`
+}
+
+type WebUser struct {
+	User
+	NewPwd string `json:"newpwd"`
 }
 
 func (u *User) TableEngine() string {

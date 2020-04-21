@@ -18,7 +18,7 @@ func (u *UserController) Login() {
 	response := util.Response{}
 
 	//if login := u.GetSession("login"); login == true {
-	usrParam := models.User{}
+	usrParam := models.WebUser{}
 	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
 		user := models.User{
 			Name: usrParam.Name,
@@ -57,7 +57,7 @@ func (u *UserController) Login() {
 func (u *UserController) Logout() {
 	response := util.Response{}
 
-	usrParam := models.User{}
+	usrParam := models.WebUser{}
 	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
 		u.DelSession("login")
 
@@ -75,7 +75,7 @@ func (u *UserController) Logout() {
 func (u *UserController) ModifyPwd() {
 	response := util.Response{}
 
-	usrParam := models.User{}
+	usrParam := models.WebUser{}
 	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
 		user := models.User{
 			Name: usrParam.Name,
@@ -128,7 +128,7 @@ func (u *UserController) ModifyPwd() {
 func (u *UserController) ModifyNickname() {
 	response := util.Response{}
 
-	usrParam := models.User{}
+	usrParam := models.WebUser{}
 	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
 		user := models.User{
 			Name: usrParam.Name,
