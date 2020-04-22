@@ -1,12 +1,18 @@
 function Login(){
     const username = $("#username").val();
     const password = $("#password").val();
+    localStorage.setItem('keyName',username);
+    if($("#remember").is(':checked')){
+        localStorage.setItem('keyPass',password);
+    }else{
+        localStorage.removeItem('keyPass');
+    }
     if(checkLogin(username, password)) {
         var param = {
             name : username,
             password : password
         };
-        var aj = $.ajax( {
+        var aj = $.ajax({
             url:'/login',
             data:JSON.stringify(param),
             type:'POST',
@@ -14,7 +20,8 @@ function Login(){
             contentType: "application/json; charset=utf-8",
             success:function(message) {
                 if(message.flag === 0 ){
-                    window.location.href='index.html';
+                    setCookie("name", username);
+                    window.location.href='manager.html';
                 }else{
                     alert("用户不存在或账号密码不正确!");
                     location.reload();
@@ -30,6 +37,32 @@ function Login(){
     }
 }
 
+function Logout(){
+    var param = {
+        name : getCookie("name")
+    };
+    var aj = $.ajax({
+        url:'/logout',
+        data:JSON.stringify(param),
+        type:'POST',
+        dataType:'json',
+        contentType: "application/json; charset=utf-8",
+        success:function(message) {
+            if(message.flag === 0 ){
+                delCookie("name");
+                window.location.href='login.html';
+            }else{
+                alert("用户登出失败!");
+                location.reload();
+            }
+        },
+        error : function() {
+            alert("登录异常，请检查网络！");
+            location.reload();
+        }
+    });
+}
+
 function Modify_pwd(){
     const username = $("#username").val();
     const old_pwd = $("#old_pwd").val();
@@ -41,7 +74,7 @@ function Modify_pwd(){
             password : old_pwd,
             newpwd : new_pwd
         };
-        var aj = $.ajax( {
+        var aj = $.ajax({
             url:'/modify/pwd',
             data:JSON.stringify(param),
             type:'POST',
@@ -49,6 +82,8 @@ function Modify_pwd(){
             contentType: "application/json; charset=utf-8",
             success:function(message) {
                 if(message.flag === 0 ){
+                    delCookie("name");
+                    localStorage.removeItem('keyPass');
                     alert("密码修改成功！");
                     window.location.href='login.html';
                 }else{
@@ -76,7 +111,7 @@ function Modify_nick(){
             password : password,
             nickname : nickname
         };
-        var aj = $.ajax( {
+        var aj = $.ajax({
             url:'/modify/nickname',
             data:JSON.stringify(param),
             type:'POST',
@@ -85,7 +120,7 @@ function Modify_nick(){
             success:function(message) {
                 if(message.flag === 0 ){
                     alert("昵称修改成功,新昵称："+message.result.nickname);
-                    window.location.href='index.html';
+                    window.location.href='manager.html';
                 }else{
                     alert("用户不存在或账号密码不正确!");
                     location.reload();
@@ -99,6 +134,28 @@ function Modify_nick(){
     }else {
         location.reload();
     }
+}
+
+function GetNickName() {
+    var username = getCookie("name");
+    var param = {
+        name : username
+    };
+    var nickname = username;
+    var aj = $.ajax({
+        async:false,
+        url:'/get/nickname',
+        data:JSON.stringify(param),
+        type:'POST',
+        dataType:'json',
+        contentType: "application/json; charset=utf-8",
+        success:function(message) {
+            if(message.flag === 0 ){
+                nickname = message.result.nickname;
+            }
+        },
+    });
+    return nickname;
 }
 
 //检查登录时用户输入
@@ -185,4 +242,33 @@ function isRegisterUserName(s) {
 function isPassword(s) {
     const pattern = /^(\w){5,20}$/;
     return pattern.test(s);
+}
+
+//写cookies
+function setCookie(key, value)
+{
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+    document.cookie = key + "=" + escape (value) + ";expires=" + exp.toGMTString();
+}
+
+//读取cookies
+function getCookie(key)
+{
+    var arr, reg = new RegExp("(^| )" + key + "=([^;]*)(;|$)");
+    if(arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+
+//删除cookies
+function delCookie(key)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var value = getCookie(key);
+    if(value !== null)
+        document.cookie= key + "=" + value + ";expires=" + exp.toGMTString();
 }

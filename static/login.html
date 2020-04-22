@@ -21,7 +21,7 @@
 						<ul>
 							<li>
 								<label class="anim">
-									<input type="checkbox" class="checkbox" required="">
+									<input type="checkbox" class="checkbox" required="" id="remember" checked>
 									<span> 记住 ?</span>
 								</label>
 							</li>
@@ -55,4 +55,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"crossorigin="anonymous"></script>
 
 <script src="js/user.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		var strName = localStorage.getItem('keyName');
+		var strPass = localStorage.getItem('keyPass');
+		if(strName){
+			$("#username").val(strName);
+		}if(strPass){
+			$("#password").val(strPass);
+		}
+	});
+</script>
 </html>

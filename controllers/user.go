@@ -17,7 +17,7 @@ type UserController struct {
 func (u *UserController) Login() {
 	response := util.Response{}
 
-	//if login := u.GetSession("login"); login == true {
+	//if login := u.GetSession(usrParam.Name); login == true {
 	usrParam := models.WebUser{}
 	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
 		user := models.User{
@@ -41,7 +41,7 @@ func (u *UserController) Login() {
 					NickName string `json:"nick_name"`
 				}{user.Id, user.NickName}
 
-				u.SetSession("login", true)
+				u.SetSession(usrParam.Name, true)
 			}
 		}
 	} else {
@@ -59,7 +59,7 @@ func (u *UserController) Logout() {
 
 	usrParam := models.WebUser{}
 	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
-		u.DelSession("login")
+		u.DelSession(usrParam.Name)
 
 		response.Flag = 0
 		response.Message = "登出成功"
@@ -107,7 +107,7 @@ func (u *UserController) ModifyPwd() {
 					if err == nil {
 						response.Flag = 0
 						response.Message = "密码修改成功"
-						u.DelSession("login")
+						u.DelSession(usrParam.Name)
 					} else {
 						response.Flag = 1
 						response.Message = err.Error()
@@ -164,6 +164,36 @@ func (u *UserController) ModifyNickname() {
 					}
 				}
 			}
+		}
+	} else {
+		response.Flag = 1
+		response.Message = err.Error()
+	}
+
+	logs.Debug(response)
+	u.Data["json"] = response
+	u.ServeJSON()
+}
+
+func (u *UserController) GetNickname() {
+	response := util.Response{}
+
+	usrParam := models.WebUser{}
+	if err := json.Unmarshal(u.Ctx.Input.RequestBody, &usrParam); err == nil {
+		user := models.User{
+			Name: usrParam.Name,
+		}
+		o := orm.NewOrm()
+		err = o.Read(&user, "Name")
+		if err != nil {
+			response.Flag = 1
+			response.Message = "用户不存在"
+		} else {
+			response.Flag = 0
+			response.Message = "获取昵称成功"
+			response.Result = struct {
+				NickName string `json:"nickname"`
+			}{user.NickName,}
 		}
 	} else {
 		response.Flag = 1

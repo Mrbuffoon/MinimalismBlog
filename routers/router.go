@@ -28,4 +28,5 @@ func init() {
 	beego.Router("/logout", &controllers.UserController{}, "post:Logout")
 	beego.Router("/modify/pwd", &controllers.UserController{}, "post:ModifyPwd")
 	beego.Router("/modify/nickname", &controllers.UserController{}, "post:ModifyNickname")
+	beego.Router("/get/nickname", &controllers.UserController{}, "post:GetNickname")
 }
