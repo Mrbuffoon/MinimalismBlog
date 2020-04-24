@@ -18,8 +18,8 @@ function Login(){
             type:'POST',
             dataType:'json',
             contentType: "application/json; charset=utf-8",
-            success:function(message) {
-                if(message.flag === 0 ){
+            success:function(data) {
+                if(data.flag === 0 ){
                     setCookie("name", username);
                     window.location.href='manager.html';
                 }else{
@@ -47,8 +47,8 @@ function Logout(){
         type:'POST',
         dataType:'json',
         contentType: "application/json; charset=utf-8",
-        success:function(message) {
-            if(message.flag === 0 ){
+        success:function(data) {
+            if(data.flag === 0 ){
                 delCookie("name");
                 window.location.href='login.html';
             }else{
@@ -80,8 +80,8 @@ function Modify_pwd(){
             type:'POST',
             dataType:'json',
             contentType: "application/json; charset=utf-8",
-            success:function(message) {
-                if(message.flag === 0 ){
+            success:function(data) {
+                if(data.flag === 0 ){
                     delCookie("name");
                     localStorage.removeItem('keyPass');
                     alert("密码修改成功！");
@@ -117,9 +117,9 @@ function Modify_nick(){
             type:'POST',
             dataType:'json',
             contentType: "application/json; charset=utf-8",
-            success:function(message) {
-                if(message.flag === 0 ){
-                    alert("昵称修改成功,新昵称："+message.result.nickname);
+            success:function(data) {
+                if(data.flag === 0 ){
+                    alert("昵称修改成功,新昵称："+data.result.nickname);
                     window.location.href='manager.html';
                 }else{
                     alert("用户不存在或账号密码不正确!");
@@ -134,28 +134,6 @@ function Modify_nick(){
     }else {
         location.reload();
     }
-}
-
-function GetNickName() {
-    var username = getCookie("name");
-    var param = {
-        name : username
-    };
-    var nickname = username;
-    var aj = $.ajax({
-        async:false,
-        url:'/get/nickname',
-        data:JSON.stringify(param),
-        type:'POST',
-        dataType:'json',
-        contentType: "application/json; charset=utf-8",
-        success:function(message) {
-            if(message.flag === 0 ){
-                nickname = message.result.nickname;
-            }
-        },
-    });
-    return nickname;
 }
 
 //检查登录时用户输入

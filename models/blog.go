@@ -17,6 +17,11 @@ type Blog struct {
 	RmFlag     int       `orm:"column(rmflag);default(0)";json:"rmflag"`
 }
 
+type WebBlog struct {
+	Blog
+	UserName string `json:"name"`
+}
+
 func (b *Blog) TableEngine() string {
 	return "INNODB"
 }
